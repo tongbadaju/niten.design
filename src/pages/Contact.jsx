@@ -28,7 +28,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-[var(--color-secondary)] text-white flex flex-col">
+    <div className="fixed inset-0 z-50 bg-[var(--color-secondary)] text-white flex flex-col overflow-y-scroll md:overflow-hidden">
       {/* Header */}
       <div className="flex justify-between pt-4 px-10">
         <div className="text-xl font-semibold text-white cursor-pointer">
@@ -113,11 +113,16 @@ const Contact = () => {
         {/* Right: Contact Info */}
         <div className="max-w-md lg:w-1/2 space-y-6 flex flex-col items-center h-full justify-center mt-10 lg:mt-0">
           <div className="py-10 pl-10 pr-30 flex flex-col align-start gap-10 bg-[var(--color-secondary-elevated)] shadow-md shadow-grey-900 rounded-lg">
-            <div>
-              <h3 className="text-sm mb-1.5">Email me at</h3>
-              <p className="text-sm text-[var(--color-primary)]">nitendesign@gmail.com</p>
-            </div>
-            
+          <div>
+            <h3 className="text-sm mb-1.5">Email me at</h3>
+            <a
+              href="mailto:nitendesign@gmail.com"
+              className="text-sm text-[var(--color-primary)] hover:underline"
+            >
+              nitendesign@gmail.com
+            </a>
+          </div>
+
             <div>
               <h3 className="text-sm mb-1.5">Call me at</h3>
               <p className="text-sm text-[var(--color-primary)]">+91-62964-22094</p>

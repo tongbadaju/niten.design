@@ -6,7 +6,7 @@ const About = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed inset-0 z-50 bg-[var(--color-primary)] text-white flex flex-col">
+    <div className="fixed inset-0 z-50 bg-[var(--color-primary)] text-white flex flex-col overflow-y-scroll md:overflow-hidden">
       {/* Header */}
       <div className="flex justify-between pt-4 px-10">
         <div className="text-xl font-semibold text-white cursor-pointer">
@@ -24,18 +24,18 @@ const About = () => {
       </div>
 
       {/* Content */}
-      <div className="flex-1 max-w-[85rem] px-4 py-10 mt-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <div className="flex-1 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
 
           <div className="flex justify-center md:justify-start">
             <img
-              className="w-full max-w-sm md:max-w-lg h-auto object-cover rounded-lg"
+              className="w-full max-w-sm md:max-w-md h-auto object-cover rounded-lg"
               src="avatar-bg.png" 
               alt="Logo Design"
             />
           </div>
 
-          <div className="mt-8 md:mt-0">
+          <div className="mt-8 md:mt-0 md:max-w-md">
             <div className="space-y-6 sm:space-y-8">
               <div className="space-y-2 md:space-y-15">
                 <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl">
@@ -63,8 +63,8 @@ const About = () => {
 
 
                   <div className="flex flex-wrap gap-4 uppercase text-xs tracking-widest">
-                    <a href="https://instagram.com/sekwabubu" className="hover:text-[var(--color-primary)] transition">Instagram</a>
-                    <a href="https://linkedin.com/in/niten-rai-926a111b9/" className="hover:text-[var(--color-primary)] transition">LinkedIn</a>
+                    <a href="https://instagram.com/sekwabubu" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-primary)] transition">Instagram</a>
+                    <a href="https://linkedin.com/in/niten-rai-926a111b9/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-primary)] transition">LinkedIn</a>
                   </div>
                 </div>
               </div>

@@ -29,12 +29,12 @@ export default function Works() {
             <div className="px-4 py-10 lg:px-8 lg:py-14 w-full flex justify-center bg-[var(--color-secondary-elevated)]">
                 <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                     <div className="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
-                        <div>
+                        <div data-aos="fade-right">
                             <img className="rounded-xl" src="skills/skill1.png" alt="Logo Design" />
                         </div>
 
 
-                        <div className="mt-5 sm:mt-10 lg:mt-0">
+                        <div className="mt-5 sm:mt-10 lg:mt-0" data-aos="fade-left">
                             <div className="space-y-6 sm:space-y-8">
                             
                                 <div className="space-y-2 md:space-y-4">
@@ -71,7 +71,7 @@ export default function Works() {
             <div className="px-4 py-10 lg:px-8 lg:py-14 w-full flex justify-center">
                 <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                     <div className="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
-                        <div className="mt-5 sm:mt-10 lg:mt-0">
+                        <div className="mt-5 sm:mt-10 lg:mt-0" data-aos="fade-right">
                             <div className="space-y-6 sm:space-y-8">    
                                 <div className="space-y-2 md:space-y-4">
                                     <h2 className="font-bold text-3xl lg:text-4xl">
@@ -97,7 +97,7 @@ export default function Works() {
                             </div>
                         </div>
 
-                        <div>
+                        <div data-aos="fade-left">
                             <img className="rounded-xl" src="skills/skill2.png" alt="Logo Design" />
                         </div>
                     </div>
@@ -107,8 +107,8 @@ export default function Works() {
             {/* Works */}
             <div className="px-4 py-10 lg:px-8 lg:py-14 w-full flex justify-center bg-[var(--color-secondary-elevated)]">
                 <div className="w-7xl">
-                    <div className="mx-auto mb-8">
-                        <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">My Works</h2>
+                    <div className="mx-auto mb-8" data-aos="fade-right">
+                        <h2 className="font-bold text-3xl lg:text-4xl">My Works</h2>
                     </div>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -116,6 +116,7 @@ export default function Works() {
                             <div
                             key={index}
                             href={project.link}
+                            data-aos="fade-up"
                             className="group relative block h-[400px] w-full rounded-xl overflow-hidden shadow hover:shadow-lg transition"
                             >
                                 <img
