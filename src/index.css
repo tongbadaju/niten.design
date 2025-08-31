@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+:root {
+  font-family: "Inter", sans-serif;
+  --color-primary: #495FEF;
+  --color-secondary:#161C2D;
+  --color-secondary-elevated:#1a2236;
+  background-color: #161C2D;
+  color:#fff;
+}
+
+body, #root, .main-content {
+  padding-top: 0;
+}
