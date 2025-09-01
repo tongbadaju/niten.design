@@ -7,10 +7,10 @@ const Footer = () => {
         <footer className="relative">
         
             {/* Footer */}
-            <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-24 space-y-15" data-aos='fade'>
+            <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-18 space-y-8 md:space-y-15" data-aos='fade'>
                 <div className="flex justify-center items-center gap-3">
                     <div className="bg-[#56B381] w-3 h-3 rounded-full" />
-                    <p className="uppercase text-sm tracking-widest">Available for Freelance Projects</p>
+                    <p className="uppercase text-xs md:text-sm tracking-widest">Available for Freelance Projects</p>
                 </div>
 
                 <div className="max-w-3xl text-center mx-auto">

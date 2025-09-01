@@ -5,6 +5,8 @@ import HeroSection from '../components/HeroSection';
 import Works from '../components/Works';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar';
 
 export default function Home() {
 
@@ -12,7 +14,7 @@ export default function Home() {
     initFlowbite();
 
     AOS.init({
-      duration: 800,
+      duration: 900,
       once: true,    
       offset: 100,
     });
@@ -20,8 +22,10 @@ export default function Home() {
 
   return (
     <>
+      <Navbar/>
       <HeroSection/>
       <Works/>
+      <Footer/>
     </>
   );
 }

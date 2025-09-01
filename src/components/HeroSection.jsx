@@ -7,14 +7,19 @@ const HeroSection = () => {
                 {/* Left Content */}
                 <div className="space-y-6 md:space-y-10" data-aos="fade-right">
                     <div className="space-y-6">
-                        <p className="uppercase text-[10px] md:text-sm font-semibold tracking-widest">Graphic Designer, Traveller</p>
-                        <h1 className="text-4xl md:text-6xl font-semibold">
-                            <span>I design digital <br/> crafts for clients.</span>
+                        <p className="uppercase text-[11px] md:text-sm font-semibold tracking-widest">Graphic Designer, Traveller</p>
+                        <h1 className="text-5xl md:text-6xl gap-1 font-semibold">
+                            <span className="block">
+                                I design digital 
+                                <span className="hidden md:inline"><br /></span>
+                                crafts for clients.
+                            </span>
                         </h1>
+
                     </div>  
                 
                     <div className="flex items-center gap-2">
-                        <div className="text-4xl md:text-6xl font-bold text-[var(--color-primary)] strong">2+</div>
+                        <div className="text-5xl md:text-6xl font-bold text-[var(--color-primary)] strong">2+</div>
                         <div className="text-xs md:text-sm font-medium">Years of <br/>Experience</div>
                     </div>
                     
@@ -22,7 +27,7 @@ const HeroSection = () => {
                     href="https://docs.google.com/document/d/1WDjvxwCQZUkV4XAMGuItQ5oH7XLAqkXg/edit?usp=sharing&ouid=101377916888086743853&rtpof=true&sd=true" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-2 md:px-6 md:py-3.5 inline-flex bg-[var(--color-primary)] text-[10px] md:text-xs tracking-widest font-medium hover:-translate-y-2 transition-200 transition-all duration-400 items-center rounded-full cursor-pointer uppercase"
+                    className="px-8 py-4 md:px-6 md:py-3.5 inline-flex bg-[var(--color-primary)] text-xs md:text-xs tracking-widest font-medium hover:-translate-y-2 transition-200 transition-all duration-400 items-center rounded-full cursor-pointer uppercase"
                     >
                     Resume
                     <span className="ml-2">
@@ -52,7 +57,7 @@ const HeroSection = () => {
 
                 {/* Placeholder for image */}
                 <div data-aos="fade-left">   
-                    <img></img>
+                    <img src="avatar.png"></img>
                 </div>
 
             </div>

@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
+import { motion as Motion } from 'framer-motion';
+import { slideUpDown } from '../resources/animations';
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -28,15 +30,19 @@ const Contact = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-[var(--color-secondary)] text-white flex flex-col overflow-y-scroll md:overflow-hidden">
+    <Motion.div className="fixed inset-0 z-50 bg-[var(--color-secondary)] text-white flex flex-col overflow-y-scroll md:overflow-hidden"
+    variants={slideUpDown}
+    initial="initial"
+    animate="animate"
+    exit="exit">
       {/* Header */}
-      <div className="flex justify-between pt-4 px-10">
+      <div className="flex justify-between pt-4  px-4 md:px-10">
         <div className="text-xl font-semibold text-white cursor-pointer">
-          niten.
+          niten.design
         </div>
 
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/')}
           className="p-2 text-white hover:text-gray-300 cursor-pointer transition"
         >
           <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-4 h-4">
@@ -46,7 +52,7 @@ const Contact = () => {
       </div>
 
       {/* Content */}
-      <div className="flex-1 px-6 sm:px-12 lg:px-40 py-10 flex flex-col lg:flex-row justify-center">
+      <div className="flex-1 px-4 sm:px-12 lg:px-40 py-10 flex flex-col lg:flex-row justify-center space-x-20">
         {/* Left: Contact Form */}
         <div className="w-full max-w-md flex items-center">
           <div className="flex flex-col space-y-8">
@@ -109,28 +115,22 @@ const Contact = () => {
           </div>
         </div>
 
-
         {/* Right: Contact Info */}
-        <div className="max-w-md lg:w-1/2 space-y-6 flex flex-col items-center h-full justify-center mt-10 lg:mt-0">
-          <div className="py-10 pl-10 pr-30 flex flex-col align-start gap-10 bg-[var(--color-secondary-elevated)] shadow-md shadow-grey-900 rounded-lg">
-          <div>
-            <h3 className="text-sm mb-1.5">Email me at</h3>
+        <div className="space-y-6 flex flex-col items-center h-full justify-center mt-10 lg:mt-0">
+          <div className="w-full py-8 pl-10 pr-30 flex flex-col align-start gap-4 bg-[var(--color-secondary-elevated)] shadow-md shadow-grey-900 rounded-lg">
+
+            <h3 className="text-sm">Email me at</h3>
             <a
               href="mailto:nitendesign@gmail.com"
               className="text-sm text-[var(--color-primary)] hover:underline"
             >
               nitendesign@gmail.com
             </a>
-          </div>
-
-            <div>
-              <h3 className="text-sm mb-1.5">Call me at</h3>
-              <p className="text-sm text-[var(--color-primary)]">+91-62964-22094</p>
-            </div>
+  
           </div>
         </div>
       </div>
-    </div>
+    </Motion.div>
   );
 };
 

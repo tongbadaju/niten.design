@@ -1,20 +1,25 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { motion as Motion } from 'framer-motion';
+import { slideUpDown } from '../resources/animations';
 
 const About = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed inset-0 z-50 bg-[var(--color-primary)] text-white flex flex-col overflow-y-scroll md:overflow-hidden">
+    <Motion.div className="fixed inset-0 z-50 bg-[var(--color-primary)] text-white flex flex-col overflow-y-scroll md:overflow-hidden"
+    variants={slideUpDown}
+    initial="initial"
+    animate="animate"
+    exit="exit">
       {/* Header */}
-      <div className="flex justify-between pt-4 px-10">
+      <div className="flex justify-between pt-4  px-4 md:px-10">
         <div className="text-xl font-semibold text-white cursor-pointer">
-          niten.
+          niten.design
         </div>
 
         <button
-          onClick={() => navigate(-1)} // Navigate back to the previous page
+          onClick={() => navigate('/')} // Navigate back to the previous page
           className="p-2 text-white hover:text-gray-300 cursor-pointer transition"
         >
           <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-5 h-5">
@@ -70,10 +75,9 @@ const About = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
-    </div>
+    </Motion.div>
   );
 }
 
