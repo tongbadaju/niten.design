@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion as Motion } from 'framer-motion';
 import { slideUpDown } from '../resources/animations';
 
-const About = () => {
+export default function About() {
   const navigate = useNavigate();
 
   return (
@@ -80,5 +80,3 @@ const About = () => {
     </Motion.div>
   );
 }
-
-export default About;

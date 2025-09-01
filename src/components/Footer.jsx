@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+export default function Footer() {
 
     return (
         <footer className="relative">
@@ -91,5 +91,3 @@ const Footer = () => {
         </footer>
     );
 };
-
-export default Footer;

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion as Motion } from 'framer-motion';
 import { slideUpDown } from '../resources/animations';
 
-const Gallery = () => {
+export default function Gallery() {
     const navigate = useNavigate();
 
     const imageCount = 9; 
@@ -54,4 +54,3 @@ const Gallery = () => {
     );
 }
 
-export default Gallery;

@@ -12,8 +12,3 @@
 body, #root, .main-content {
   padding-top: 0;
 }
-
-/* In your main CSS file, like index.css */
-html {
-  scroll-behavior: smooth;
-}

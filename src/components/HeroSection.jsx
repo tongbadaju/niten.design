@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HeroSection = () => {
+export default function HeroSection() {
     return (
         <div className="py-10 md:py-30 flex items-center justify-center px-6 w-full">
             <div className="grid md:grid-cols-2 gap-10 md:gap-60 items-center justify-between">
@@ -64,5 +64,3 @@ const HeroSection = () => {
         </div>
     );
 };
-
-export default HeroSection;
