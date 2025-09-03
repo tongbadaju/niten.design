@@ -18,7 +18,7 @@ export default function Navbar() {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  };  
 
   const handleNavClick = ({ path, scroll }) => {
     setMenuOpen(false);
