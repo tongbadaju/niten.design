@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { projects } from '../resources/content';
 import { Link } from 'react-router-dom';
 
 export default function Works() {
+  const [showGallery, setShowGallery] = useState(false);
+
+  // Define the URL for your single combined gallery image
+  // This replaces the Array.from logic for multiple images
+  const singleCombinedGalleryImage = 'gallery/other-works.png'; // **<-- UPDATE THIS PATH**
+
   return (
     <>
       {/* Skill 1: Logo Design */}
@@ -39,6 +45,8 @@ export default function Works() {
         </div>
       </section>
 
+      {/* --- */}
+
       {/* Skill 2: Brand Identity */}
       <section className="px-4 py-10 lg:px-8 lg:py-14 w-full flex justify-center">
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -71,12 +79,16 @@ export default function Works() {
         </div>
       </section>
 
+      {/* --- */}
+
       {/* Works Section */}
       <section id="works" className="px-6 py-10 lg:px-8 lg:py-14 w-full flex justify-center bg-[var(--color-secondary-elevated)] scroll-mt-24">
         <div className="w-7xl">
           <div className="mx-auto mb-8" data-aos="fade-right">
             <h2 className="font-bold text-3xl lg:text-4xl">My Works</h2>
           </div>
+
+          {/* Projects Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <Link
@@ -103,6 +115,43 @@ export default function Works() {
                 </div>
               </Link>
             ))}
+          </div>
+
+          {/* Expanded Gallery Section (Now displaying a single combined image) */}
+          {showGallery && (
+            <div className="mt-10" data-aos="fade-up">
+              <div className="mx-auto mb-8" data-aos="fade-right">
+                <h2 className="font-bold text-3xl lg:text-4xl">Other Works</h2>
+              </div>
+              {/* This replaces the masonry grid with a single centered image */}
+              <div className="flex justify-center">
+                <img
+                  className="w-full h-auto rounded-xl shadow-lg transition-transform duration-500 ease-in-out"
+                  src={singleCombinedGalleryImage}
+                  alt="Combined Gallery Image"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* More Works / Show Less Button */}
+          <div className="flex justify-center mt-10" data-aos="fade-up">
+            <button
+              onClick={() => setShowGallery(!showGallery)}
+              className="group relative inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-black bg-white rounded-full hover:bg-gray-100 transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              <span>{showGallery ? 'Show Less' : 'View More Works'}</span>
+              <svg
+                className="w-5 h-5 transition-transform duration-300"
+                style={{ transform: showGallery ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
           </div>
         </div>
       </section>

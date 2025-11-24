@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import About from './pages/About';
-import Gallery from './pages/Gallery';
 import WorkDetail from './pages/WorkDetail';
 import { AnimatePresence } from 'framer-motion';
 
@@ -18,7 +17,6 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/gallery" element={<Gallery />} />
               <Route path="/work/:id" element={<WorkDetail />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>

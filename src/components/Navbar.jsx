@@ -9,7 +9,6 @@ export default function Navbar() {
   const navItems = [
     { name: 'about me', path: '/about' },
     { name: 'work', path: '#works', scroll: true },
-    { name: 'gallery', path: '/gallery' },
     { name: 'contact', path: '/contact' },
   ];
 
@@ -65,7 +64,7 @@ export default function Navbar() {
               {scroll ? (
                 <button
                   onClick={() => handleNavClick({ path, scroll })}
-                  className="text-sm font-medium px-3 py-2 rounded cursor-pointer text-white hover:text-[var(--color-primary)] transition-colors duration-300"
+                  className="text-base font-medium px-3 py-2 rounded cursor-pointer text-white hover:text-[var(--color-primary)] transition-colors duration-300"
                 >
                   {name}
                 </button>
@@ -73,7 +72,7 @@ export default function Navbar() {
                 <Link
                   to={path}
                   onClick={() => setMenuOpen(false)}
-                  className="text-sm font-medium px-3 py-2 rounded cursor-pointer text-white hover:text-[var(--color-primary)] transition-colors duration-300"
+                  className="text-base font-medium px-3 py-2 rounded cursor-pointer text-white hover:text-[var(--color-primary)] transition-colors duration-300"
                 >
                   {name}
                 </Link>

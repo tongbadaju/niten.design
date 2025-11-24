@@ -68,8 +68,8 @@ export default function About() {
 
 
                   <div className="flex flex-wrap gap-4 uppercase text-xs tracking-widest">
-                    <a href="https://instagram.com/sekwabubu" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-primary)] transition">Instagram</a>
-                    <a href="https://linkedin.com/in/niten-rai-926a111b9/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-primary)] transition">LinkedIn</a>
+                    <a href="https://instagram.com/sekwabubu" target="_blank" rel="noopener noreferrer" className="hover:-translate-y-1 transition duration-300">Instagram</a>
+                    <a href="https://linkedin.com/in/niten-rai-926a111b9/" target="_blank" rel="noopener noreferrer" className="hover:-translate-y-1 transition duration-300">LinkedIn</a>
                   </div>
                 </div>
               </div>
