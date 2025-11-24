@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 export default function Works() {
   const [showGallery, setShowGallery] = useState(false);
 
-  // Define the URL for your single combined gallery image
-  // This replaces the Array.from logic for multiple images
-  const singleCombinedGalleryImage = 'gallery/other-works.png'; // **<-- UPDATE THIS PATH**
+  const singleCombinedGalleryImage = 'works/other-works.avif';
 
   return (
     <>
