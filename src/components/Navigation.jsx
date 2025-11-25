@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useScroll } from '../hooks/useScroll';
-import { navItems, personalInfo } from '../data/portfolioData';
+import { navItems } from '../data/portfolioData';
 
 export function Navigation() {
   const { currentSection, setCurrentSection } = useScroll();
@@ -53,19 +53,39 @@ export function Navigation() {
             onClick={(e) => { e.preventDefault(); setCurrentSection(0); }}
             className="text-xl font-bold text-gradient"
           >
-            {personalInfo.name.split(' ')[0]}
-            <span className="text-blue-500">.</span>
+            niten.design
           </a>
 
+          {/* Hamburger / Close Button */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="w-10 h-10 glass rounded-lg flex items-center justify-center"
+            className="w-10 h-10 glass rounded-lg flex items-center justify-center relative"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
-            <div className="w-5 h-4 flex flex-col justify-between">
-              <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-              <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
-              <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
-            </div>
+            {/* Top line */}
+            <span 
+              className={`absolute w-5 h-0.5 bg-white transition-all duration-300 ease-in-out
+                ${isMenuOpen 
+                  ? 'rotate-45 top-1/2 -translate-y-1/2' 
+                  : 'rotate-0 top-[13px]'
+                }
+              `}
+            />
+            {/* Middle line */}
+            <span 
+              className={`absolute w-5 h-0.5 bg-white top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out
+                ${isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}
+              `}
+            />
+            {/* Bottom line */}
+            <span 
+              className={`absolute w-5 h-0.5 bg-white transition-all duration-300 ease-in-out
+                ${isMenuOpen 
+                  ? '-rotate-45 top-1/2 -translate-y-1/2' 
+                  : 'rotate-0 bottom-[13px]'
+                }
+              `}
+            />
           </button>
         </div>
 
@@ -80,7 +100,7 @@ export function Navigation() {
               <button
                 key={item.id}
                 onClick={() => { setCurrentSection(item.id); setIsMenuOpen(false); }}
-                className={`w-full text-left px-4 py-3 rounded-xl transition-colors
+                className={`w-full text-left text-sm px-4 py-2.5 rounded-xl transition-colors
                   ${currentSection === item.id ? 'bg-blue-500/20 text-blue-400' : 'text-gray-300 hover:bg-white/5'}
                 `}
               >

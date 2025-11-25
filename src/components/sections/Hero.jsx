@@ -43,7 +43,7 @@ export function Hero() {
 
           {/* Main heading */}
           <h1 
-            className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-5 leading-tight transition-all duration-700
+            className={`text-5xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-5 leading-tight transition-all duration-700
               ${shouldShow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
             `}
             style={{ transitionDelay: '100ms' }}
@@ -69,7 +69,7 @@ export function Hero() {
             `}
             style={{ transitionDelay: '400ms' }}
           >
-            <button onClick={() => setCurrentSection(3)} className="btn-primary px-6 md:px-8 py-2 md:py-2.5 rounded-full text-sm md:text-base font-medium text-white inline-flex items-center gap-2">
+            <button onClick={() => setCurrentSection(3)} className="btn-primary justify-center px-6 md:px-8 py-2 md:py-2.5 rounded-full text-sm md:text-base font-medium text-white inline-flex items-center gap-2">
               View My Work
               <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

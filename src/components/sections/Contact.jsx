@@ -74,7 +74,7 @@ export function Contact() {
         <div className="fixed bottom-1/4 left-1/4 w-52 md:w-80 h-52 md:h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Scrollable Content */}
-        <div className="relative z-10 min-h-full px-4 md:px-6 py-24 lg:mt-25">
+        <div className="relative z-10 min-h-full px-4 md:px-6 pt-24 pb-7 lg:pt-48">
           <div className="w-full max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
               {/* Left - Info */}

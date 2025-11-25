@@ -5,14 +5,14 @@ export function About() {
   const { shouldShow } = useScrollAnimation(1);
 
   return (
-    <div className="relative lg:mt-20">
+    <div className="relative min-h-screen lg:min-h-full lg:pt-30">
       {/* Background */}
       <div className="fixed inset-0 bg-gradient-radial pointer-events-none" />
       <div className="fixed top-0 right-0 w-1/2 h-1/2 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="fixed bottom-0 left-0 w-1/2 h-1/2 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Scrollable Content */}
-      <div className="relative z-10 min-h-full px-4 md:px-6 py-24 md:py-32">
+      <div className="relative z-10 min-h-full px-4 md:px-6 py-16 md:py-24 lg:py-32">
         <div className="w-full max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             {/* Left - Image & Download Button */}
@@ -48,7 +48,7 @@ export function About() {
                 className="flex justify-center lg:justify-start"
               >
                 <button
-                  className="group relative inline-flex items-center gap-3 px-6 md:px-8 py-2 md:py-2.5 border-2 border-blue-500 rounded-full font-medium text-blue-400 text-sm md:text-base overflow-hidden transition  -all duration-300 hover:bg-blue-500 hover:text-white hover:shadow-lg hover:shadow-blue-500/25"
+                  className="group relative inline-flex items-center gap-2 px-6 md:px-8 py-2 md:py-2.5 border-2 border-blue-500 rounded-full font-medium text-blue-400 text-sm md:text-base overflow-hidden transition  -all duration-300 hover:bg-blue-500 hover:text-white hover:shadow-lg hover:shadow-blue-500/25"
                 >
                   {/* Icon */}
                   <div className="relative w-5 h-5 md:w-6 md:h-6">
@@ -99,8 +99,8 @@ export function About() {
                   <span className="text-gradient"> Excellence</span>
                 </h2>
                 <p className="text-gray-400 text-sm md:text-base lg:text-lg leading-relaxed mb-3 md:mb-4">
-                  With over 8 years of experience in graphic design, I've had the privilege of working 
-                  with startups, agencies, and Fortune 500 companies. My passion lies in creating 
+                  With over 2 years of experience in graphic design, I've had the privilege of working 
+                  with startups, agencies, and companies. My passion lies in creating 
                   visual experiences that not only look stunning but also drive results.
                 </p>
                 <p className="text-gray-500 text-sm md:text-base leading-relaxed">

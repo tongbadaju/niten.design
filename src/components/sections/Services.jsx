@@ -1,7 +1,9 @@
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { useScroll } from '../../hooks/useScroll';
 import { services } from '../../data/portfolioData';
 
 export function Services() {
+  const { setCurrentSection } = useScroll();
   const { shouldShow } = useScrollAnimation(2);
 
   return (
@@ -165,7 +167,7 @@ export function Services() {
                 <p className="text-gray-400 text-sm md:text-base mb-6 md:mb-8 max-w-xl mx-auto">
                   Let's work together to create something amazing. I'm always excited to take on new challenges and bring fresh ideas to life.
                 </p>
-                <button className="btn-primary px-6 md:px-8 py-2 md:py-2.5 rounded-full text-sm md:text-base font-medium text-white inline-flex items-center gap-2">
+                <button onClick={() => setCurrentSection(4)} className="btn-primary px-6 md:px-8 py-2 md:py-2.5 rounded-full text-sm md:text-base font-medium text-white inline-flex items-center gap-2">
                   Start a Conversation
                   <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

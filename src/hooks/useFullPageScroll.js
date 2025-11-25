@@ -5,6 +5,8 @@ export function useFullPageScroll() {
   const { nextSection, prevSection, isAnimating, currentSection } = useScroll();
   const touchStartY = useRef(0);
   const touchStartX = useRef(0);
+  const touchStartTime = useRef(0);
+  const touchStartScrollTop = useRef(0);
   const lastScrollTime = useRef(0);
 
   // Get the current section's scrollable container
@@ -19,16 +21,14 @@ export function useFullPageScroll() {
     if (!container) return false;
 
     const { scrollTop, scrollHeight, clientHeight } = container;
-    const isScrollable = scrollHeight > clientHeight;
+    const isScrollable = scrollHeight > clientHeight + 5; // 5px threshold
 
     if (!isScrollable) return false;
 
     if (direction === 'up') {
-      // Can scroll up if not at top
-      return scrollTop > 1;
+      return scrollTop > 5;
     } else {
-      // Can scroll down if not at bottom
-      return scrollTop < scrollHeight - clientHeight - 1;
+      return scrollTop < scrollHeight - clientHeight - 5;
     }
   }, [getCurrentSectionContainer]);
 
@@ -36,9 +36,8 @@ export function useFullPageScroll() {
     const now = Date.now();
     if (now - lastScrollTime.current < 800 || isAnimating) return false;
 
-    // Check if section content is scrollable
     if (canScrollInSection(direction)) {
-      return false; // Let the section scroll naturally
+      return false;
     }
 
     lastScrollTime.current = now;
@@ -55,17 +54,24 @@ export function useFullPageScroll() {
     // Wheel event for desktop
     const handleWheel = (e) => {
       const direction = e.deltaY > 0 ? 'down' : 'up';
-      
-      // If section content can scroll, don't prevent default
+
       if (canScrollInSection(direction)) {
         return;
       }
 
       e.preventDefault();
-      
+
       if (Math.abs(e.deltaY) < 10) return;
-      
-      handleSectionChange(direction);
+
+      const now = Date.now();
+      if (now - lastScrollTime.current < 800 || isAnimating) return;
+      lastScrollTime.current = now;
+
+      if (direction === 'down') {
+        nextSection();
+      } else {
+        prevSection();
+      }
     };
 
     // Keyboard navigation
@@ -85,66 +91,98 @@ export function useFullPageScroll() {
       }
     };
 
-    // Touch events for mobile
-    let touchStartScrollTop = 0;
-
+    // Touch start - capture initial values
     const handleTouchStart = (e) => {
       touchStartY.current = e.touches[0].clientY;
       touchStartX.current = e.touches[0].clientX;
-      
+      touchStartTime.current = Date.now();
+
       const container = getCurrentSectionContainer();
-      touchStartScrollTop = container ? container.scrollTop : 0;
+      touchStartScrollTop.current = container ? container.scrollTop : 0;
     };
 
+    // Touch end - determine if we should change section
     const handleTouchEnd = (e) => {
       if (isAnimating) return;
 
       const touchEndY = e.changedTouches[0].clientY;
       const touchEndX = e.changedTouches[0].clientX;
-      
+      const touchEndTime = Date.now();
+
       const diffY = touchStartY.current - touchEndY;
       const diffX = Math.abs(touchStartX.current - touchEndX);
+      const timeDiff = touchEndTime - touchStartTime.current;
 
-      // Must be a vertical swipe (not horizontal)
-      if (Math.abs(diffY) < 50 || diffX > Math.abs(diffY)) {
-        return;
-      }
+      // Calculate velocity for better swipe detection
+      const velocity = Math.abs(diffY) / timeDiff;
+
+      // Adjusted thresholds for better detection
+      const minSwipeDistance = 30; // Reduced from 50 for easier swiping
+      const minVelocity = 0.2; // Minimum velocity threshold
+
+      // Must have minimum swipe distance
+      if (Math.abs(diffY) < minSwipeDistance) return;
+
+      // Must be primarily vertical (allow some horizontal movement)
+      if (diffX > Math.abs(diffY) * 0.8) return;
+
+      // Need either good velocity OR large distance
+      if (velocity < minVelocity && Math.abs(diffY) < 80) return;
 
       const direction = diffY > 0 ? 'down' : 'up';
       const container = getCurrentSectionContainer();
 
       if (container) {
-        const { scrollTop, scrollHeight, clientHeight } = container;
-        const isScrollable = scrollHeight > clientHeight;
+        const { scrollHeight, clientHeight } = container;
+        const isScrollable = scrollHeight > clientHeight + 5;
 
         if (isScrollable) {
-          // Check if user was scrolling content
-          const scrollDiff = Math.abs(container.scrollTop - touchStartScrollTop);
-          
-          // If there was significant scroll within content, don't change section
-          if (scrollDiff > 10) {
+          const currentScrollTop = container.scrollTop;
+          const scrollDiff = Math.abs(currentScrollTop - touchStartScrollTop.current);
+
+          // Check position at END of touch, not start
+          const atTop = currentScrollTop <= 5;
+          const atBottom = currentScrollTop >= scrollHeight - clientHeight - 5;
+
+          // If user scrolled content significantly during touch, be more careful
+          if (scrollDiff > 20) {
+            // Still allow section change if at boundaries AND swiping in that direction
+            // AND started at the boundary too
+            if (direction === 'up' && atTop && touchStartScrollTop.current <= 5) {
+              prevSection();
+              return;
+            }
+            if (direction === 'down' && atBottom && touchStartScrollTop.current >= scrollHeight - clientHeight - 5) {
+              nextSection();
+              return;
+            }
+            // Otherwise, user was scrolling content, don't change section
             return;
           }
 
           // At top and swiping up - go to previous section
-          if (direction === 'up' && scrollTop <= 1) {
-            handleSectionChange('up');
+          if (direction === 'up' && atTop) {
+            prevSection();
             return;
           }
 
           // At bottom and swiping down - go to next section
-          if (direction === 'down' && scrollTop >= scrollHeight - clientHeight - 1) {
-            handleSectionChange('down');
+          if (direction === 'down' && atBottom) {
+            nextSection();
             return;
           }
 
-          // Otherwise, let content scroll
+          // Not at boundary, let content scroll naturally (do nothing)
           return;
         }
       }
 
-      // No scrollable content, change section
-      handleSectionChange(direction);
+      // No scrollable content or no container, change section directly
+      if (direction === 'down') {
+        nextSection();
+      } else {
+        prevSection();
+      }
     };
 
     // Add event listeners
@@ -159,5 +197,5 @@ export function useFullPageScroll() {
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [handleSectionChange, isAnimating, canScrollInSection, getCurrentSectionContainer]);
+  }, [handleSectionChange, isAnimating, canScrollInSection, getCurrentSectionContainer, nextSection, prevSection]);
 }
