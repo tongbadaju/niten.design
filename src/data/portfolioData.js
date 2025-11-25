@@ -17,7 +17,7 @@ export const services = [
     description: "I design logos that do more than just look good — they connect. Whether it's modern minimalism or deep symbolism, my goal is to create visual identities that reflect a brand's core vision and speak directly to its audience.",
     additionalText: "Every logo I create is grounded in strong design principles, aligned with current trends, and crafted to tell a story that feels real and relevant.",
     quote: "I believe a great logo isn't just seen — it's felt. That's what I aim to deliver with every project.",
-    image: "services/service-0.png",
+    image: "services/service-0.avif",
     aspectRatio: "square"
   },
   {
@@ -25,7 +25,7 @@ export const services = [
     title: "Brand Identity",
     description: "I build brand identities that go beyond visuals. From color palettes to typography, every detail is chosen with purpose, shaped by the brand's personality and what it stands for.",
     additionalText: "I help brands find their voice and express it clearly across all touchpoints, so they feel consistent, memorable, and real. Blending strategic thinking with clean, thoughtful design, I craft identities that not only look sharp but resonate with the people they're meant for.",
-    image: "services/service-1.png",
+    image: "services/service-1.avif",
     aspectRatio: "portrait"
   },
   {
@@ -33,8 +33,6 @@ export const services = [
     title: "Visual Design",
     description: "I create visuals that are not just aesthetically appealing, but strategically designed to communicate clearly and engage the viewer.",
     additionalText: "Whether it's social media creatives, marketing visuals, posters or digital campaigns, my approach is rooted in visual hierarchy and clarity, ensuring that each piece speaks the right message at the right moment.",
-    image: "services/service-1.png",
-    aspectRatio: "portrait"
   }
 ];
 
@@ -44,8 +42,8 @@ export const projects = [
     title: "Kotha",
     type: "Brand Design",
     description: "A modern property rental platform with a clean and minimal identity designed to reflect simplicity, trust, and scalability.",
-    thumbnail: "/works/kotha/thumbnail.png",
-    image: "/works/kotha/image.png",
+    thumbnail: "/works/kotha/thumbnail.avif",
+    image: "/works/kotha/image.avif",
     overview: [
       "Kotha is a scalable property rental platform that makes listings, bookings, and management simple for both users and staff. The brand identity needed to feel modern, professional, and minimal to match its vision."
     ],
@@ -58,8 +56,8 @@ export const projects = [
     title: "Aroha",
     type: "Brand Design",
     description: "A gender-neutral fashion brand merging minimalist design with traditional handloom fabrics, crafted in collaboration with rural artisans.",
-    thumbnail: "/works/aroha/thumbnail.png",
-    image: "/works/aroha/image.png",
+    thumbnail: "/works/aroha/thumbnail.avif",
+    image: "/works/aroha/image.avif",
     overview: [
       "Aroha is a gender-neutral fashion brand that bridges modern minimalism with India's rich handloom heritage. The project aimed to create a brand identity that reflects inclusivity, sustainability, and timeless design, while highlighting the craftsmanship of rural artisans."
     ],
@@ -72,8 +70,8 @@ export const projects = [
     title: "Wild Nest",
     type: "Brand Design",
     description: "An eco-conscious hospitality brand with a nature-inspired identity, blending sustainability, comfort, and harmony with the wild.",
-    thumbnail: "/works/wild-nest/thumbnail.png",
-    image: "/works/wild-nest/image.png",
+    thumbnail: "/works/wild-nest/thumbnail.avif",
+    image: "/works/wild-nest/image.avif",
     overview: [
       "WildNest is an eco-conscious hospitality brand that redefines nature getaways by blending sustainability with comfort. Nestled in India's forests, it offers travelers a chance to slow down, reconnect with nature, and experience the wild in its purest form. The brand identity needed to capture harmony with nature while remaining modern, versatile, and memorable."
     ],
@@ -86,19 +84,19 @@ export const projects = [
 // Other Works - Static gallery images
 export const otherWorks = {
   vertical: [
-    { id: 1, src: "/works/gallery/vertical-1.jpg", alt: "Design Work 1" },
-    { id: 2, src: "/works/gallery/vertical-2.jpg", alt: "Design Work 2" },
-    { id: 3, src: "/works/gallery/vertical-3.jpg", alt: "Design Work 3" },
-    { id: 4, src: "/works/gallery/vertical-4.jpg", alt: "Design Work 4" },
-    { id: 5, src: "/works/gallery/vertical-5.jpg", alt: "Design Work 5" },
-    { id: 6, src: "/works/gallery/vertical-6.jpg", alt: "Design Work 6" },
-    { id: 7, src: "/works/gallery/vertical-7.jpg", alt: "Design Work 7" },
+    { id: 1, src: "/works/gallery/vertical-1.avif", alt: "Design Work 1" },
+    { id: 2, src: "/works/gallery/vertical-2.avif", alt: "Design Work 2" },
+    { id: 3, src: "/works/gallery/vertical-3.avif", alt: "Design Work 3" },
+    { id: 4, src: "/works/gallery/vertical-4.avif", alt: "Design Work 4" },
+    { id: 5, src: "/works/gallery/vertical-5.avif", alt: "Design Work 5" },
+    { id: 6, src: "/works/gallery/vertical-6.avif", alt: "Design Work 6" },
+    { id: 7, src: "/works/gallery/vertical-7.avif", alt: "Design Work 7" },
   ],
   horizontal: [
-    { id: 1, src: "/works/gallery/horizontal-1.jpg", alt: "Design Work 8" },
-    { id: 2, src: "/works/gallery/horizontal-2.jpg", alt: "Design Work 9" },
-    { id: 3, src: "/works/gallery/horizontal-3.jpg", alt: "Design Work 10" },
-    { id: 4, src: "/works/gallery/horizontal-4.jpg", alt: "Design Work 11" },
+    { id: 1, src: "/works/gallery/horizontal-1.avif", alt: "Design Work 8" },
+    { id: 2, src: "/works/gallery/horizontal-2.avif", alt: "Design Work 9" },
+    { id: 3, src: "/works/gallery/horizontal-3.avif", alt: "Design Work 10" },
+    { id: 4, src: "/works/gallery/horizontal-4.avif", alt: "Design Work 11" },
   ]
 };
 

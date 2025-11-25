@@ -27,7 +27,7 @@ export function About() {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 rounded-3xl rotate-6 opacity-50" />
                   <div className="absolute inset-0 glass-strong rounded-3xl overflow-hidden">
                     <img 
-                      src="avatar.png"
+                      src="avatar.avif"
                       alt={personalInfo.name}
                       className="w-full h-full object-cover"
                     />
