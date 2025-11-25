@@ -16,7 +16,6 @@ export function SectionWrapper({ children, index }) {
         pointerEvents: isActive ? 'auto' : 'none',
       }}
     >
-      {/* This is the scrollable container that hook looks for */}
       <div 
         className="section-scroll-container w-full h-full overflow-y-auto overflow-x-hidden overscroll-contain"
         style={{

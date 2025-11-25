@@ -1,14 +1,27 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { projects, otherWorks } from '../../data/portfolioData';
-
 export function Portfolio() {
   const { shouldShow } = useScrollAnimation(3);
   const [expandedProject, setExpandedProject] = useState(null);
   const [hoveredProject, setHoveredProject] = useState(null);
   const [showGallery, setShowGallery] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   const detailsRef = useRef(null);
-
+  // Combine all gallery images for navigation - memoized to prevent recreating on each render
+  const allGalleryImages = useMemo(() => [
+    ...otherWorks.horizontal,
+    ...otherWorks.vertical
+  ], []);
+  // Memoize navigateLightbox to fix ESLint warning
+  const navigateLightbox = useCallback((direction) => {
+    setLightboxIndex(prevIndex => {
+      const newIndex = (prevIndex + direction + allGalleryImages.length) % allGalleryImages.length;
+      setLightboxImage(allGalleryImages[newIndex]);
+      return newIndex;
+    });
+  }, [allGalleryImages]);
   // Scroll to details when a project is expanded
   useEffect(() => {
     if (expandedProject && detailsRef.current) {
@@ -17,7 +30,33 @@ export function Portfolio() {
       }, 100);
     }
   }, [expandedProject]);
-
+  // Handle escape key to close lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxImage) return;
+      
+      if (e.key === 'Escape') {
+        setLightboxImage(null);
+      } else if (e.key === 'ArrowRight') {
+        navigateLightbox(1);
+      } else if (e.key === 'ArrowLeft') {
+        navigateLightbox(-1);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxImage, navigateLightbox]);
+  // Prevent body scroll when lightbox is open
+  useEffect(() => {
+    if (lightboxImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [lightboxImage]);
   const handleProjectClick = (projectId) => {
     if (expandedProject === projectId) {
       setExpandedProject(null);
@@ -25,16 +64,87 @@ export function Portfolio() {
       setExpandedProject(projectId);
     }
   };
-
+  const openLightbox = (image, index) => {
+    setLightboxImage(image);
+    setLightboxIndex(index);
+  };
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
   const selectedProject = projects.find(p => p.id === expandedProject);
-
   return (
     <div className="relative min-h-full">
       {/* Background */}
       <div className="fixed inset-0 bg-gradient-radial pointer-events-none" />
       <div className="fixed top-1/4 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="fixed bottom-1/4 left-1/4 w-60 md:w-80 h-60 md:h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+          onClick={closeLightbox}
+        >
+          {/* Close Button - Positioned below nav on mobile, top-right on desktop */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-20 right-4 md:top-20 md:right-6 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          >
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          {/* Previous Button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); navigateLightbox(-1); }}
+            className="absolute left-2 md:left-6 top-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors shadow-sm"
+          >
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          {/* Next Button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); navigateLightbox(1); }}
+            className="absolute right-2 md:right-6 top-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors shadow-sm"
+          >
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          {/* Image Container */}
+          <div 
+            className="relative max-w-[90vw] max-h-[80vh] md:max-h-[90vh] flex items-center justify-center mt-16 md:mt-0"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={lightboxImage.src}
+              alt={lightboxImage.alt}
+              className="max-w-full max-h-[70vh] md:max-h-[85vh] object-contain rounded-lg shadow-2xl"
+            />
+            
+            {/* Image Counter - Mobile: above image, Desktop: below image */}
+            <div className="absolute -bottom-10 md:bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full text-white text-sm">
+              {lightboxIndex + 1} / {allGalleryImages.length}
+            </div>
+          </div>
+          {/* Thumbnail Strip - Desktop only */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden lg:flex gap-2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-xl max-w-[80vw] overflow-x-auto">
+            {allGalleryImages.map((img, idx) => (
+              <button
+                key={img.id}
+                onClick={(e) => { e.stopPropagation(); openLightbox(img, idx); }}
+                className={`flex-shrink-0 w-16 h-12 rounded-md overflow-hidden transition-all duration-200 ${
+                  idx === lightboxIndex 
+                    ? 'ring-2 ring-blue-500 opacity-100' 
+                    : 'opacity-50 hover:opacity-75'
+                }`}
+              >
+                <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       {/* Scrollable Content */}
       <div className="relative z-10 min-h-full px-4 md:px-6 py-24 md:py-32">
         <div className="w-full max-w-7xl mx-auto">
@@ -52,7 +162,6 @@ export function Portfolio() {
               A collection of brand identities and design projects that tell meaningful stories
             </p>
           </div>
-
           {/* Projects Grid */}
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {projects.map((project, index) => (
@@ -77,12 +186,10 @@ export function Portfolio() {
                     alt={project.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-
                   {/* Gradient Overlay */}
                   <div className={`absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent transition-opacity duration-300
                     ${hoveredProject === project.id ? 'opacity-100' : 'opacity-0'}
                   `} />
-
                   {/* Hover Content */}
                   <div className={`absolute inset-0 p-5 md:p-6 flex flex-col justify-between transition-all duration-300
                     ${hoveredProject === project.id ? 'opacity-100' : 'opacity-0'}
@@ -104,7 +211,6 @@ export function Portfolio() {
                         </svg>
                       </div>
                     </div>
-
                     {/* Bottom - Project Info */}
                     <div className={`transition-all duration-300 delay-75
                       ${hoveredProject === project.id ? 'translate-y-0' : 'translate-y-8'}
@@ -126,7 +232,6 @@ export function Portfolio() {
                       </div>
                     </div>
                   </div>
-
                   {/* Active Indicator */}
                   {expandedProject === project.id && (
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500" />
@@ -135,7 +240,6 @@ export function Portfolio() {
               </div>
             ))}
           </div>
-
           {/* Expanded Project Details */}
           {selectedProject && (
             <div 
@@ -154,7 +258,6 @@ export function Portfolio() {
                       className="w-full h-auto"
                     />
                   </div>
-
                   {/* Sticky Project Content */}
                   <div className="lg:sticky lg:self-start p-6 md:p-10 space-y-8 md:space-y-10 lg:border-l border-gray-800 lg:max-h-[calc(100vh-6rem)]">
                     
@@ -177,12 +280,10 @@ export function Portfolio() {
                         </svg>
                       </button>
                     </div>
-
                     {/* Description */}
                     <p className="text-gray-300 text-sm md:text-base leading-relaxed">
                       {selectedProject.description}
                     </p>
-
                     {/* Overview */}
                     <div>
                       <div className="flex items-center gap-3 mb-4">
@@ -199,7 +300,6 @@ export function Portfolio() {
                         </p>
                       ))}
                     </div>
-
                     {/* Contribution */}
                     <div>
                       <div className="flex items-center gap-3 mb-4">
@@ -216,7 +316,6 @@ export function Portfolio() {
                         </p>
                       ))}
                     </div>
-
                     {/* Project Tags */}
                     <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-800">
                       {['Brand Identity', 'Logo Design', 'Visual System', 'Guidelines'].map((tag, index) => (
@@ -233,7 +332,6 @@ export function Portfolio() {
               </div>
             </div>
           )}
-
           {/* View More Works Button */}
           <div 
             className={`flex justify-center mt-12 md:mt-16 transition-all duration-700
@@ -257,7 +355,6 @@ export function Portfolio() {
               </svg>
             </button>
           </div>
-
           {/* Other Works Gallery */}
           {showGallery && (
             <div className="mt-12 md:mt-16 animate-fadeIn">
@@ -270,7 +367,6 @@ export function Portfolio() {
                   More design projects and explorations
                 </p>
               </div>
-
               {/* Horizontal Images First - 2 Sets */}
               <div className="space-y-4 md:space-y-6 mb-8 md:mb-10">
                 {/* Set 1 */}
@@ -280,6 +376,7 @@ export function Portfolio() {
                       key={image.id}
                       className="group relative rounded-xl md:rounded-2xl overflow-hidden aspect-[1480/1080] cursor-pointer"
                       style={{ animationDelay: `${index * 100}ms` }}
+                      onClick={() => openLightbox(image, index)}
                     >
                       <img 
                         src={image.src}
@@ -299,7 +396,6 @@ export function Portfolio() {
                     </div>
                   ))}
                 </div>
-
                 {/* Set 2 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   {otherWorks.horizontal.slice(2, 4).map((image, index) => (
@@ -307,6 +403,7 @@ export function Portfolio() {
                       key={image.id}
                       className="group relative rounded-xl md:rounded-2xl overflow-hidden aspect-[1480/1080] cursor-pointer"
                       style={{ animationDelay: `${(index + 2) * 100}ms` }}
+                      onClick={() => openLightbox(image, index + 2)}
                     >
                       <img 
                         src={image.src}
@@ -327,7 +424,6 @@ export function Portfolio() {
                   ))}
                 </div>
               </div>
-
               {/* Vertical Images - Masonry Grid */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 {otherWorks.vertical.map((image, index) => (
@@ -335,6 +431,7 @@ export function Portfolio() {
                     key={image.id}
                     className="group relative rounded-xl md:rounded-2xl overflow-hidden aspect-[4/5] cursor-pointer"
                     style={{ animationDelay: `${(index + 4) * 100}ms` }}
+                    onClick={() => openLightbox(image, otherWorks.horizontal.length + index)}
                   >
                     <img 
                       src={image.src}
