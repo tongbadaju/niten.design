@@ -6,6 +6,59 @@ export function Services() {
   const { setCurrentSection } = useScroll();
   const { shouldShow } = useScrollAnimation(2);
 
+  // Icons for Visual Design features
+  const visualDesignFeatures = [
+    { 
+      name: 'Typography', 
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      )
+    },
+    { 
+      name: 'Color Theory', 
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+        </svg>
+      )
+    },
+    { 
+      name: 'Layout & Composition', 
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+        </svg>
+      )
+    },
+    { 
+      name: 'Visual Hierarchy', 
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+      )
+    },
+    { 
+      name: 'Social Media Design', 
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+        </svg>
+      )
+    },
+    { 
+      name: 'Marketing Graphics', 
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+        </svg>
+      )
+    },
+  ];
+
   return (
     <div className="relative min-h-full">
       {/* Background */}
@@ -147,11 +200,63 @@ export function Services() {
                 </div>
               </div>
             </div>
+
+            {/* Service 3 - Visual Design (No Photo - Card Layout) */}
+            <div 
+              className={`transition-all duration-700 delay-500
+                ${shouldShow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}
+              `}
+            >
+              <div className="glass-strong rounded-2xl md:rounded-3xl p-6 md:p-10 lg:p-12 relative overflow-hidden">
+                {/* Background decorations */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+                
+                <div className="relative z-10">
+                  {/* Header */}
+                  <div className="text-center mb-8 md:mb-12">
+                    {/* Icon */}
+                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 mb-4 md:mb-6">
+                      <svg className="w-8 h-8 md:w-10 md:h-10 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    
+                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                      {services[2].title}
+                    </h3>
+                    
+                    <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+                      {services[2].description}
+                    </p>
+                    
+                    <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-2xl mx-auto mt-3">
+                      {services[2].additionalText}
+                    </p>
+                  </div>
+
+                  {/* Features Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                    {visualDesignFeatures.map((feature, index) => (
+                      <div 
+                        key={index} 
+                        className="group flex flex-col items-center text-center p-4 md:p-6 rounded-xl md:rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-cyan-500/30 transition-all duration-300"
+                      >
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center text-cyan-400 mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300">
+                          {feature.icon}
+                        </div>
+                        <span className="text-gray-300 text-sm md:text-base font-medium">{feature.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Bottom CTA Section */}
           <div 
-            className={`mt-20 md:mt-32 text-center transition-all duration-700 delay-500
+            className={`mt-20 md:mt-32 text-center transition-all duration-700 delay-600
               ${shouldShow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
             `}
           >

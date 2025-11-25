@@ -27,6 +27,14 @@ export const services = [
     additionalText: "I help brands find their voice and express it clearly across all touchpoints, so they feel consistent, memorable, and real. Blending strategic thinking with clean, thoughtful design, I craft identities that not only look sharp but resonate with the people they're meant for.",
     image: "services/service-1.png",
     aspectRatio: "portrait"
+  },
+  {
+    id: 3,
+    title: "Visual Design",
+    description: "I create visuals that are not just aesthetically appealing, but strategically designed to communicate clearly and engage the viewer.",
+    additionalText: "Whether it's social media creatives, marketing visuals, posters or digital campaigns, my approach is rooted in visual hierarchy and clarity, ensuring that each piece speaks the right message at the right moment.",
+    image: "services/service-1.png",
+    aspectRatio: "portrait"
   }
 ];
 
